@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Featured Items</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let item of featuredList">
+      <ion-label>{{ item.item_name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
