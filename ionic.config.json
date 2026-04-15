@@ -1,0 +1,7 @@
+{
+  "name": "PROG2005_A3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
