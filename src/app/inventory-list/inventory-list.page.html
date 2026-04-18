@@ -5,17 +5,23 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="search()"></ion-searchbar>
-  <ion-spinner *ngIf="loading" class="ion-text-center" style="display:block;margin:2rem auto"></ion-spinner>
+  <ion-searchbar 
+    [(ngModel)]="searchTerm" 
+    (ionInput)="search()"
+    placeholder="Search by item name">
+  </ion-searchbar>
+
+  <ion-spinner *ngIf="loading" class="ion-text-center" style="display:block;margin:20px auto"></ion-spinner>
 
   <ion-list *ngIf="!loading">
     <ion-item *ngFor="let item of filteredList">
       <ion-label>
         <h2>{{ item.item_name }}</h2>
         <p>Category: {{ item.category }}</p>
-        <p>Qty: {{ item.quantity }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
         <p>Price: ${{ item.price }}</p>
         <p>Status: {{ item.stock_status }}</p>
+        <ion-note color="success" *ngIf="item.featured_item === 1">Featured Item</ion-note>
       </ion-label>
     </ion-item>
   </ion-list>
