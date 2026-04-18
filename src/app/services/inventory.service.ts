@@ -16,4 +16,9 @@ export class InventoryService {
   getItemByName(name: string): Observable<InventoryItem> {
     return this.http.get<InventoryItem>(`${this.API_URL}/${name}`);
   }
+
+  // New on the second day: Add product
+  addItem(item: any): Observable<any> {
+    return this.http.post(this.API_URL, item);
+  }
 }
