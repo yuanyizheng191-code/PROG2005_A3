@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inventory List</ion-title>
+    <app-help-widget pageName="List" slot="end"></app-help-widget>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-search-bar
+    [(searchTerm)]="searchTerm"
+    placeholder="Search by item name"
+    (search)="searchByName()"
+    (clear)="loadItems()">
+  </app-search-bar>
+
+  <ion-button expand="block" fill="clear" (click)="loadItems()">
+    <ion-icon slot="start" name="refresh"></ion-icon>
+    Refresh List
+  </ion-button>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading items...</p>
+  </div>
+
+  <div *ngIf="!isLoading && filteredItems.length > 0" class="card-container">
+    <app-inventory-card *ngFor="let item of filteredItems" [item]="item">
+    </app-inventory-card>
+  </div>
+
+  <div *ngIf="!isLoading && filteredItems.length === 0" class="empty-state">
+    <ion-icon name="cube-outline" size="large"></ion-icon>
+    <p>No items found</p>
+  </div>
+</ion-content>
