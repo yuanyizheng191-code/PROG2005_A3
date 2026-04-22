@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Privacy & Security</ion-title>
+    <app-help-widget pageName="Privacy" slot="end"></app-help-widget>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="intro-section">
+    <h2>Privacy & Security Information</h2>
+    <p>This page explains the privacy and security measures implemented in our inventory management application.</p>
+  </div>
+
+  <div class="topics-section">
+    <h3>Privacy Topics</h3>
+    <ion-card *ngFor="let topic of privacyTopics">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon [name]="topic.icon" class="topic-icon"></ion-icon>
+          {{ topic.title }}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{ topic.content }}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="security-section">
+    <h3>Security Requirements</h3>
+    <ion-list>
+      <ion-item *ngFor="let requirement of securityRequirements">
+        <ion-icon name="shield-checkmark-outline" slot="start" color="success"></ion-icon>
+        <ion-label>{{ requirement }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
