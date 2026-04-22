@@ -13,13 +13,20 @@ export enum StockStatus {
 }
 
 export interface InventoryItem {
-  item_id: number;
-  item_name: string;
+  itemId?: number;
+  itemName: string;
   category: Category;
   quantity: number;
   price: number;
-  supplier_name: string;
-  stock_status: StockStatus;
-  featured_item: number;
-  special_note?: string | null;
+  supplierName: string;
+  stockStatus: StockStatus;
+  featuredItem: number;
+  specialNote?: string;
+}
+
+export interface ApiResponse<T = any> {
+  success: boolean;
+  data?: T;
+  message?: string;
+  error?: string;
 }
