@@ -1,0 +1,19 @@
+<div class="search-container">
+  <ion-searchbar
+    [ngModel]="searchTerm"
+    (ngModelChange)="searchTermChange.emit($event)"
+    (ionClear)="onClear()"
+    [placeholder]="placeholder"
+    show-clear-button="always">
+  </ion-searchbar>
+  <ion-button 
+    expand="block" 
+    fill="outline" 
+    size="small"
+    (click)="onSearch()"
+    [disabled]="!searchTerm.trim()"
+    class="search-button">
+    <ion-icon slot="start" name="search"></ion-icon>
+    Search
+  </ion-button>
+</div>

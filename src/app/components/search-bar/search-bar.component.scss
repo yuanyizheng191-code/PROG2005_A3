@@ -1,0 +1,16 @@
+.search-container {
+  padding: 12px 16px;
+  background: var(--ion-color-light);
+}
+
+ion-searchbar {
+  --background: var(--ion-color-white);
+  --border-radius: 8px;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.search-button {
+  margin: 0;
+  --border-radius: 8px;
+}
