@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Item</ion-title>
+    <app-help-widget pageName="Add" slot="end"></app-help-widget>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Item Name *</ion-label>
+      <ion-input formControlName="itemName" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Category *</ion-label>
+      <ion-select formControlName="category" interface="action-sheet">
+        <ion-select-option *ngFor="let cat of categories" [value]="cat">
+          {{ cat }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Quantity *</ion-label>
+      <ion-input formControlName="quantity" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Price *</ion-label>
+      <ion-input formControlName="price" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Supplier Name *</ion-label>
+      <ion-input formControlName="supplierName" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Stock Status *</ion-label>
+      <ion-select formControlName="stockStatus" interface="action-sheet">
+        <ion-select-option *ngFor="let status of stockStatuses" [value]="status">
+          {{ status }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Featured Item</ion-label>
+      <ion-checkbox formControlName="featuredItem" [checked]="addForm.get('featuredItem')?.value === 1"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Special Note (Optional)</ion-label>
+      <ion-textarea formControlName="specialNote" rows="3"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="addForm.invalid">
+      Add Item
+    </ion-button>
+  </form>
+
+  <div class="featured-section">
+    <h3>Featured Items</h3>
+    <div *ngIf="isLoading" class="loading-container">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+    <ion-list *ngIf="!isLoading && featuredItems.length > 0">
+      <ion-item *ngFor="let item of featuredItems">
+        <ion-label>
+          <h2>{{ item.itemName }}</h2>
+          <p>{{ item.category }} | ${{ item.price }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <p *ngIf="!isLoading && featuredItems.length === 0" class="no-featured">
+      No featured items yet
+    </p>
+  </div>
+</ion-content>
