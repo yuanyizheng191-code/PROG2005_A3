@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Manage Items</ion-title>
+    <app-help-widget pageName="Manage" slot="end"></app-help-widget>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="search-section">
+    <h3>Search Item</h3>
+    <form [formGroup]="searchForm" (ngSubmit)="searchItem()">
+      <ion-item>
+        <ion-label position="floating">Item Name</ion-label>
+        <ion-input formControlName="itemName" type="text" placeholder="Enter item name to search"></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit" [disabled]="searchForm.invalid || isLoading">
+        Search
+      </ion-button>
+    </form>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Searching...</p>
+  </div>
+
+  <div *ngIf="isEditing && foundItem" class="update-section">
+    <h3>Update Item</h3>
+    <form [formGroup]="updateForm" (ngSubmit)="updateItem()">
+      <ion-item>
+        <ion-label position="floating">Item Name</ion-label>
+        <ion-input formControlName="itemName" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Category *</ion-label>
+        <ion-select formControlName="category" interface="action-sheet">
+          <ion-select-option *ngFor="let cat of categories" [value]="cat">
+            {{ cat }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Quantity *</ion-label>
+        <ion-input formControlName="quantity" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Price *</ion-label>
+        <ion-input formControlName="price" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Supplier Name *</ion-label>
+        <ion-input formControlName="supplierName" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Stock Status *</ion-label>
+        <ion-select formControlName="stockStatus" interface="action-sheet">
+          <ion-select-option *ngFor="let status of stockStatuses" [value]="status">
+            {{ status }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Featured Item</ion-label>
+        <ion-checkbox formControlName="featuredItem" [checked]="updateForm.get('featuredItem')?.value === 1"></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Special Note (Optional)</ion-label>
+        <ion-textarea formControlName="specialNote" rows="3"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" type="submit" [disabled]="updateForm.invalid">
+        Update Item
+      </ion-button>
+    </form>
+
+    <ion-button expand="block" color="danger" (click)="deleteItem()">
+      Delete Item
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" (click)="resetForm()">
+      Cancel
+    </ion-button>
+  </div>
+</ion-content>
